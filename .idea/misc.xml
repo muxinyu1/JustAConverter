@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.146" />
+        <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable-v24/ic_type_image.xml" value="0.212" />
+        <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_bottom_bar_converter.xml" value="0.152" />
+        <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_bottom_bar_history.xml" value="0.152" />
+        <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_bottom_bar_settings.xml" value="0.1775" />
+        <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_drawer_screen_cloudconvert.xml" value="0.2625" />
+        <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_drawer_screen_github.xml" value="0.2625" />
+        <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_drawer_screen_linkout.xml" value="0.2625" />
+        <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_drawer_screen_title.xml" value="0.2625" />
+        <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_drawer_screen_trash.xml" value="0.2625" />
+        <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_iconmonstr_time_17.xml" value="0.212" />
+        <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_launcher_background.xml" value="0.146" />
+        <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_type_archive.xml" value="0.2205" />
+        <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_type_audio.xml" value="0.1855" />
+        <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_type_chart.xml" value="0.1855" />
+        <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_type_image.xml" value="0.146" />
+        <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_type_sheet.xml" value="0.16" />
+        <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_type_video.xml" value="0.1855" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

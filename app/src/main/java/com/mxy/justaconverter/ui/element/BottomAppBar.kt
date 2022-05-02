@@ -23,10 +23,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.mxy.justaconverter.R
+import com.mxy.justaconverter.routing.JustAConverterRouter
+import com.mxy.justaconverter.routing.Screen
 import com.mxy.justaconverter.viewmodel.BottomBarViewModel
 
 @Composable
-fun BottomAppBar(bottomBarViewModel: BottomBarViewModel) {
+fun BottomAppBar(state: BottomBarViewModel.BottomBarState) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -45,30 +47,27 @@ fun BottomAppBar(bottomBarViewModel: BottomBarViewModel) {
         ) {
             BottomAppBarItem(
                 itemName = stringResource(id = R.string.bottom_bar_converter_item),
-                bottomBarViewModel = bottomBarViewModel,
                 modifier = Modifier
                     .align(alignment = Alignment.CenterVertically)
                     .weight(1 / 3f)
                     .wrapContentHeight(),
-                onItemClick = bottomBarViewModel.onBottomBarItemClick
+                state = state
             )
             BottomAppBarItem(
                 itemName = stringResource(id = R.string.bottom_bar_history_item),
-                bottomBarViewModel = bottomBarViewModel,
                 modifier = Modifier
                     .align(alignment = Alignment.CenterVertically)
                     .weight(1 / 3f)
                     .wrapContentHeight(),
-                onItemClick = bottomBarViewModel.onBottomBarItemClick
+                state = state
             )
             BottomAppBarItem(
                 itemName = stringResource(id = R.string.bottom_bar_settings_item),
-                bottomBarViewModel = bottomBarViewModel,
                 modifier = Modifier
                     .align(alignment = Alignment.CenterVertically)
                     .weight(1 / 3f)
                     .wrapContentHeight(),
-                onItemClick = bottomBarViewModel.onBottomBarItemClick
+                state = state
             )
         }
     }
@@ -77,14 +76,10 @@ fun BottomAppBar(bottomBarViewModel: BottomBarViewModel) {
 
 @Composable
 fun BottomAppBarItem(
+    state: BottomBarViewModel.BottomBarState,
     itemName: String,
-    bottomBarViewModel: BottomBarViewModel,
-    modifier: Modifier,
-    onItemClick: (BottomBarViewModel.BottomBarState) -> Unit
+    modifier: Modifier
 ) {
-    val itemNameState = remember {
-        mutableStateOf(itemName)
-    }
     val painter = when (itemName) {
         stringResource(id = R.string.bottom_bar_converter_item) -> painterResource(id = R.drawable.ic_bottom_bar_converter)
         stringResource(id = R.string.bottom_bar_history_item) -> painterResource(id = R.drawable.ic_bottom_bar_history)
@@ -97,21 +92,16 @@ fun BottomAppBarItem(
         stringResource(id = R.string.bottom_bar_settings_item) -> BottomBarViewModel.BottomBarState.Settings
         else -> BottomBarViewModel.BottomBarState.Settings
     }
-    val bottomBarViewModelState = remember {
-        mutableStateOf(bottomBarViewModel.state)
-    }
     Column(modifier = modifier
         .padding(5.dp)
         .clip(CircleShape)
         .clickable {
-            onItemClick(
-                when (itemNameState.value) {
-                    "Converter" -> BottomBarViewModel.BottomBarState.Converter
-                    "History" -> BottomBarViewModel.BottomBarState.History
-                    "Settings" -> BottomBarViewModel.BottomBarState.Settings
-                    else -> BottomBarViewModel.BottomBarState.Settings
-                }
-            )
+            val target = when(rightState) {
+                BottomBarViewModel.BottomBarState.Converter -> Screen.ConverterScreen
+                BottomBarViewModel.BottomBarState.Settings -> Screen.SettingsScreen
+                BottomBarViewModel.BottomBarState.History -> Screen.HistoryScreen
+            }
+            JustAConverterRouter.navigateTo(target)
         }) {
         Icon(
             painter = painter,
@@ -119,7 +109,7 @@ fun BottomAppBarItem(
             modifier = Modifier
                 .wrapContentHeight()
                 .align(alignment = Alignment.CenterHorizontally),
-            tint = if (bottomBarViewModelState.value == rightState) Color.Black else Color.Black.copy(
+            tint = if (state == rightState) Color.Black else Color.Black.copy(
                 alpha = 0.3f
             )
         )
@@ -130,7 +120,7 @@ fun BottomAppBarItem(
                 .align(alignment = Alignment.CenterHorizontally)
                 .padding(top = 7.dp),
             fontSize = 14.sp,
-            fontWeight = if (bottomBarViewModelState.value == rightState) FontWeight.Bold else FontWeight.Normal,
+            fontWeight = if (state == rightState) FontWeight.Bold else FontWeight.Normal,
             color = Color.Black.copy(alpha = 0.8f)
         )
     }
@@ -139,6 +129,5 @@ fun BottomAppBarItem(
 @Composable
 @Preview
 fun BottomAppBarPreview() {
-    val bottomBarViewModel = BottomBarViewModel.getDefault()
-    BottomAppBar(bottomBarViewModel = bottomBarViewModel)
+    BottomAppBar(state = BottomBarViewModel.BottomBarState.Settings)
 }

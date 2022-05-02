@@ -49,7 +49,7 @@ fun ConverterScreen(
             }
         })
         },
-        bottomBar = { BottomAppBar(bottomBarViewModel = BottomBarViewModel.getDefault()) }
+        bottomBar = { BottomAppBar(state = BottomBarViewModel.BottomBarState.Converter)}
     )
 }
 
@@ -74,7 +74,7 @@ fun ConverterScreenPreview() {
         fromStateFrom = fromStateFrom,
         fromStateTo = fromStateTo,
         filePathState = filePathState,
-        onConverterButtonClick = { /*TODO*/ },
+        onConverterButtonClick = {  },
         enableState = enableState
     )
 }

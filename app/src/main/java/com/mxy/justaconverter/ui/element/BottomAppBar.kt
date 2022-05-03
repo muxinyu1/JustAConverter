@@ -97,7 +97,7 @@ fun BottomAppBarItem(
         .clip(CircleShape)
         .clickable {
             val target = when(rightState) {
-                BottomBarViewModel.BottomBarState.Converter -> Screen.ConverterScreen
+                BottomBarViewModel.BottomBarState.Converter -> Screen.TypeCardsScreen
                 BottomBarViewModel.BottomBarState.Settings -> Screen.SettingsScreen
                 BottomBarViewModel.BottomBarState.History -> Screen.HistoryScreen
             }

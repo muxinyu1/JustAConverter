@@ -1,6 +1,7 @@
 package com.mxy.justaconverter.ui.screen
 
 import android.net.Uri
+import android.util.Log
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
@@ -40,7 +41,7 @@ fun TypeCardsScreen(convertScreenViewModel: ConvertScreenViewModel) {
             })
         }, content = {
             TypesCards(onTypeCardClick = {
-                val type = when(it) {
+                val type = when (it) {
                     "Archive" -> ScaffoldContentViewModel.ChooseFileType.Archive
                     "Audio" -> ScaffoldContentViewModel.ChooseFileType.Audio
                     "Document" -> ScaffoldContentViewModel.ChooseFileType.Document
@@ -59,6 +60,10 @@ fun TypeCardsScreen(convertScreenViewModel: ConvertScreenViewModel) {
                     to = "..."
                     filePath = Uri.parse("")
                 }
+                Log.d(
+                    "mxy!!!",
+                    "点击了${it}卡片，现在convertScreenViewModel.chooseFileType = ${convertScreenViewModel.chooseFileType.name}"
+                )
                 JustAConverterRouter.navigateTo(Screen.ConverterScreen)
             })
         })

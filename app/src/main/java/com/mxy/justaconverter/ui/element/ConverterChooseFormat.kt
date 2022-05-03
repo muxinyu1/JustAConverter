@@ -1,11 +1,8 @@
 package com.mxy.justaconverter.ui.element
 
-import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -28,8 +25,12 @@ import com.mxy.justaconverter.viewmodel.ScaffoldContentViewModel
 fun ConverterChooseFormat(
     modifier: Modifier,
     chooseFileType: ScaffoldContentViewModel.ChooseFileType,
-    formatState: MutableState<String>
+    format: String,
+    onFormatChanged: (String) -> Unit
 ) {
+    val formatState = remember {
+        mutableStateOf(format)
+    }
     val expandState = remember {
         mutableStateOf(false)
     }
@@ -54,7 +55,9 @@ fun ConverterChooseFormat(
             )
             Spacer(modifier = Modifier.width(5.dp))
             Icon(
-                modifier = Modifier.align(alignment = Alignment.CenterVertically).scale(0.5f),
+                modifier = Modifier
+                    .align(alignment = Alignment.CenterVertically)
+                    .scale(0.5f),
                 painter = painterResource(id = R.drawable.ic_choose_format_dropdown),
                 contentDescription = ""
             )
@@ -63,7 +66,9 @@ fun ConverterChooseFormat(
             onDismissRequest = { expandState.value = false }) {
             for (formatName in formatList) {
                 DropdownMenuItem(onClick = {
-                    formatState.value = formatName; expandState.value = false
+                    formatState.value = formatName
+                    onFormatChanged(formatName)
+                    expandState.value = false
                 }) {
                     Text(text = formatName)
                 }
@@ -215,11 +220,12 @@ fun getFormatList(chooseFileType: ScaffoldContentViewModel.ChooseFileType): List
 @Preview(showBackground = true)
 fun ConverterChooseFormatPreview() {
     val formatState = remember {
-        mutableStateOf("...");
+        mutableStateOf("...")
     }
     ConverterChooseFormat(
         modifier = Modifier.wrapContentHeight(),
         chooseFileType = ScaffoldContentViewModel.ChooseFileType.Archive,
-        formatState = formatState
+        format = formatState.value,
+        onFormatChanged = {}
     )
 }

@@ -5,9 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -20,11 +18,14 @@ import com.mxy.justaconverter.viewmodel.ScaffoldContentViewModel
 fun ConverterScreenScaffoldContent(
     chooseFileType: ScaffoldContentViewModel.ChooseFileType,
     modifier: Modifier,
-    fromStateFrom: MutableState<String>,
-    fromStateTo: MutableState<String>,
-    filePathState: MutableState<Uri?>,
+    from: String,
+    to: String,
+    filePath: Uri?,
     onConvertButtonClick: () -> Unit,
-    enableState: MutableState<Boolean>
+    enable: Boolean,
+    onFilePathChanged: (Uri?) -> Unit,
+    onFromFormatChanged: (String) -> Unit,
+    onToFormatChanged: (String) -> Unit
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
         ConverterTitle(
@@ -38,14 +39,17 @@ fun ConverterScreenScaffoldContent(
                 .fillMaxWidth()
                 .align(alignment = Alignment.CenterHorizontally),
             chooseFileType = chooseFileType,
-            formatStateFrom = fromStateFrom,
-            formatStateTo = fromStateTo
+            from = from,
+            to = to,
+            onToFormatChanged = onToFormatChanged,
+            onFromFormatChanged = onFromFormatChanged
         )
         ConverterFileChooser(
             modifier = Modifier
                 .fillMaxWidth()
                 .align(alignment = Alignment.CenterHorizontally),
-            filePathState = filePathState
+            filePath = filePath,
+            onFilePathChanged = onFilePathChanged
         )
         Spacer(modifier = Modifier.height(30.dp))
         ConverterConvertButton(
@@ -53,7 +57,7 @@ fun ConverterScreenScaffoldContent(
                 .fillMaxWidth()
                 .align(alignment = Alignment.CenterHorizontally),
             onConvertButtonClick = onConvertButtonClick,
-            enableState = enableState
+            enable = enable
         )
     }
 }
@@ -77,10 +81,13 @@ fun ConverterScreenScaffoldContentPreview() {
     ConverterScreenScaffoldContent(
         chooseFileType = ScaffoldContentViewModel.ChooseFileType.Sheet,
         modifier = Modifier.fillMaxWidth(),
-        fromStateFrom = fromStateFrom,
-        fromStateTo = fromStateTo,
-        filePathState = filePathState,
+        from = fromStateFrom.value,
+        to = fromStateTo.value,
+        filePath = filePathState.value,
         onConvertButtonClick = { },
-        enableState = enableState
+        enable = enableState.value,
+        onFilePathChanged = {},
+        onFromFormatChanged = {},
+        onToFormatChanged = {}
     )
 }

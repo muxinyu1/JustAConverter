@@ -1,6 +1,7 @@
 package com.mxy.justaconverter.ui.element
 
 import android.net.Uri
+import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.BorderStroke
@@ -22,12 +23,13 @@ import com.mxy.justaconverter.R
 import com.mxy.justaconverter.ui.theme.LightColorDefault
 
 @Composable
-fun ConverterFileChooser(modifier: Modifier, filePathState: MutableState<Uri?>) {
+fun ConverterFileChooser(modifier: Modifier, filePath: Uri?, onFilePathChanged: (Uri?) -> Unit) {
     var text by remember {
         mutableStateOf("")
     }
     val launcher = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-        filePathState.value = uri
+        onFilePathChanged(uri)
+        Log.d("mxy!!!", "filePath = ${filePath?.path}")
         when {
             uri == null -> {
                 text = ""
@@ -90,14 +92,4 @@ fun ConverterFileChooser(modifier: Modifier, filePathState: MutableState<Uri?>) 
         }
 
     }
-}
-
-@Composable
-@Preview(showBackground = true)
-fun ConverterFileChooserPreview() {
-    val uri = Uri.parse("")
-    val filePathState = remember {
-        mutableStateOf(uri)
-    }
-    ConverterFileChooser(Modifier.fillMaxWidth(), filePathState)
 }

@@ -6,13 +6,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mxy.justaconverter.viewmodel.ScaffoldContentViewModel
@@ -21,8 +19,10 @@ import com.mxy.justaconverter.viewmodel.ScaffoldContentViewModel
 fun ConverterFromToCard(
     modifier: Modifier,
     chooseFileType: ScaffoldContentViewModel.ChooseFileType,
-    formatStateFrom: MutableState<String>,
-    formatStateTo: MutableState<String>
+    from: String,
+    to: String,
+    onFromFormatChanged: (String) -> Unit,
+    onToFormatChanged: (String) -> Unit
 ) {
     Row(
         modifier = modifier
@@ -39,7 +39,8 @@ fun ConverterFromToCard(
                 .align(alignment = Alignment.CenterVertically)
                 .padding(4.dp),
             chooseFileType = chooseFileType,
-            formatState = formatStateFrom
+            format = from,
+            onFormatChanged = onFromFormatChanged
         )
         Text(
             text = "TO",
@@ -51,7 +52,8 @@ fun ConverterFromToCard(
                 .align(alignment = Alignment.CenterVertically)
                 .padding(4.dp),
             chooseFileType = chooseFileType,
-            formatState = formatStateTo
+            format = to,
+            onFormatChanged = onToFormatChanged
         )
     }
 }
@@ -68,7 +70,9 @@ fun ConverterFromToCardPreview() {
     ConverterFromToCard(
         modifier = Modifier.fillMaxWidth(),
         chooseFileType = ScaffoldContentViewModel.ChooseFileType.Audio,
-        formatStateFrom = formatStateFrom,
-        formatStateTo = formatStateTo
+        from = formatStateFrom.value,
+        to = formatStateTo.value,
+        onFromFormatChanged = {},
+        onToFormatChanged = {}
     )
 }

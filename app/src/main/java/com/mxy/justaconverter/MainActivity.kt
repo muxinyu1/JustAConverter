@@ -16,7 +16,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.mxy.justaconverter.routing.JustAConverterRouter
 import com.mxy.justaconverter.routing.Screen
 import com.mxy.justaconverter.ui.screen.ConverterScreen
-import com.mxy.justaconverter.ui.screen.ConverterScreenPreview
 import com.mxy.justaconverter.ui.screen.TypeCardsScreen
 import com.mxy.justaconverter.ui.theme.JustAConverterTheme
 import com.mxy.justaconverter.viewmodel.ConvertScreenViewModel
@@ -39,27 +38,12 @@ class MainActivity : ComponentActivity() {
                         "...",
                         Uri.parse("")
                     )
-                    val fromStateFrom = remember {
-                        mutableStateOf(convertScreenViewModel.from)
-                    }
-                    val fromStateTo = remember {
-                        mutableStateOf(convertScreenViewModel.to)
-                    }
-                    val filePathState = remember {
-                        mutableStateOf(convertScreenViewModel.filePath)
+                    val convertScreenViewModelState = remember {
+                        mutableStateOf(convertScreenViewModel)
                     }
                     when (JustAConverterRouter.currentScreen) {
-                        is Screen.TypeCardsScreen -> TypeCardsScreen(convertScreenViewModel = convertScreenViewModel)
-                        is Screen.ConverterScreen -> ConverterScreen(
-                            chooseFileType = convertScreenViewModel.chooseFileType,
-                            fromStateFrom = fromStateFrom,
-                            fromStateTo = fromStateTo,
-                            filePathState = filePathState,
-                            onConverterButtonClick = convertScreenViewModel.convert,
-                            enableState = remember {
-                                mutableStateOf(convertScreenViewModel.convertButtonState)
-                            }
-                        )
+                        is Screen.TypeCardsScreen -> TypeCardsScreen(convertScreenViewModel = convertScreenViewModelState.value)
+                        is Screen.ConverterScreen -> ConverterScreen(convertScreenViewModelState.value)
                         else -> Text(text = "Else")
                     }
                 }

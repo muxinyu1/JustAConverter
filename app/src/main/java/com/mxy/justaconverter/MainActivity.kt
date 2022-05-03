@@ -11,6 +11,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.mxy.justaconverter.routing.JustAConverterRouter
@@ -32,6 +33,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
+                    val coroutineScope = rememberCoroutineScope()
                     val convertScreenViewModel = ConvertScreenViewModel(
                         ScaffoldContentViewModel.ChooseFileType.Archive,
                         "...",
@@ -42,8 +44,14 @@ class MainActivity : ComponentActivity() {
                         mutableStateOf(convertScreenViewModel)
                     }
                     when (JustAConverterRouter.currentScreen) {
-                        is Screen.TypeCardsScreen -> TypeCardsScreen(convertScreenViewModel = convertScreenViewModelState.value)
-                        is Screen.ConverterScreen -> ConverterScreen(convertScreenViewModelState.value)
+                        is Screen.TypeCardsScreen -> TypeCardsScreen(
+                            convertScreenViewModel = convertScreenViewModelState.value,
+                            coroutineScope = coroutineScope
+                        )
+                        is Screen.ConverterScreen -> ConverterScreen(
+                            convertScreenViewModelState.value,
+                            coroutineScope = coroutineScope
+                        )
                         else -> Text(text = "Else")
                     }
                 }

@@ -14,12 +14,12 @@ import com.mxy.justaconverter.ui.element.TypesCards
 import com.mxy.justaconverter.viewmodel.BottomBarViewModel
 import com.mxy.justaconverter.viewmodel.ConvertScreenViewModel
 import com.mxy.justaconverter.viewmodel.ScaffoldContentViewModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
-fun TypeCardsScreen(convertScreenViewModel: ConvertScreenViewModel) {
+fun TypeCardsScreen(convertScreenViewModel: ConvertScreenViewModel, coroutineScope: CoroutineScope) {
     val scaffoldState = rememberScaffoldState()
-    val coroutineScope = rememberCoroutineScope()
     Scaffold(scaffoldState = scaffoldState, topBar = {
         TopAppBar {
             coroutineScope.launch {

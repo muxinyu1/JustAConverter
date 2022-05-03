@@ -12,19 +12,18 @@ import com.mxy.justaconverter.ui.element.TopAppBar
 import com.mxy.justaconverter.viewmodel.BottomBarViewModel
 import com.mxy.justaconverter.viewmodel.ConvertScreenViewModel
 import com.mxy.justaconverter.viewmodel.ScaffoldContentViewModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
-fun ConverterScreen(convertScreenViewModel: ConvertScreenViewModel
-) {
+fun ConverterScreen(convertScreenViewModel: ConvertScreenViewModel, coroutineScope: CoroutineScope) {
     val scaffoldState = rememberScaffoldState()
-    val coroutineScope = rememberCoroutineScope()
     Scaffold(topBar = {
-        TopAppBar(onDrawerClick = {
+        TopAppBar{
             coroutineScope.launch {
                 scaffoldState.drawerState.open()
             }
-        })
+        }
     }, content = {
         ConverterScreenScaffoldContent(
             chooseFileType = convertScreenViewModel.chooseFileType,
@@ -36,9 +35,10 @@ fun ConverterScreen(convertScreenViewModel: ConvertScreenViewModel
             enable = convertScreenViewModel.convertButtonState,
             onFilePathChanged = convertScreenViewModel.onFilePathChanged,
             onFromFormatChanged = convertScreenViewModel.onFromFormatChanged,
-            onToFormatChanged = convertScreenViewModel.onToFormatChanged
+            onToFormatChanged = convertScreenViewModel.onToFormatChanged,
         )
     },
+        scaffoldState = scaffoldState,
         drawerContent = { DrawerScreen(onDrawerCardClick = {
             coroutineScope.launch {
                 scaffoldState.drawerState.close()

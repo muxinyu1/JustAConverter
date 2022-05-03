@@ -38,7 +38,8 @@ class MainActivity : ComponentActivity() {
                         ScaffoldContentViewModel.ChooseFileType.Archive,
                         "...",
                         "...",
-                        Uri.parse("")
+                        Uri.parse(""),
+                        context = this
                     )
                     val convertScreenViewModelState = remember {
                         mutableStateOf(convertScreenViewModel)

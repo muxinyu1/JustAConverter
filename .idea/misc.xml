@@ -8,11 +8,17 @@
         <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_bottom_bar_converter.xml" value="0.152" />
         <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_bottom_bar_history.xml" value="0.152" />
         <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_bottom_bar_settings.xml" value="0.1775" />
+        <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_choose_file_screen_right_arrow.xml" value="0.1825" />
+        <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_choose_format_dropdown.xml" value="0.1825" />
+        <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_converter_file_chooser_link.xml" value="0.1825" />
+        <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_drawer_screen_about.xml" value="0.1825" />
+        <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_drawer_screen_anon_files.xml" value="0.1825" />
         <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_drawer_screen_cloudconvert.xml" value="0.2625" />
         <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_drawer_screen_github.xml" value="0.2625" />
         <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_drawer_screen_linkout.xml" value="0.2625" />
         <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_drawer_screen_title.xml" value="0.2625" />
         <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_drawer_screen_trash.xml" value="0.2625" />
+        <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_iconmonstr_synchronization_11.xml" value="0.251" />
         <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_iconmonstr_time_17.xml" value="0.212" />
         <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_launcher_background.xml" value="0.146" />
         <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_type_archive.xml" value="0.2205" />
@@ -21,6 +27,8 @@
         <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_type_image.xml" value="0.146" />
         <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_type_sheet.xml" value="0.16" />
         <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/drawable/ic_type_video.xml" value="0.1855" />
+        <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1825" />
+        <entry key="..\:/fromAndroidStudio/JustAConverter/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.251" />
       </map>
     </option>
   </component>

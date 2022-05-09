@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Just A Converter</string>
+    <string name="app_name">Converter</string>
     <string name="type_view_model_default_name">Image</string>
     <string name="type_view_model_default_description">bmp, jpg, png, etc</string>
     <string name="type_view_model_img">Image</string>
@@ -29,6 +29,7 @@
     <string name="drawer_screen_card_about">About</string>
     <string name="drawer_screen_card_github">GitHub</string>
     <string name="drawer_screen_card_cloud_convert">CloudConvert</string>
+    <string name="drawer_screen_card_anon_files">AnonFiles</string>
     <string name="drawer_screen_card_link_out">LinkOut</string>
     <string name="choose_file_screen_archive_description">Convert your archives.\nAmongst many others,\nsupport ZIP, RAR, TAR.GZ and 7Z.</string>
     <string name="choose_file_screen_audio_description">Convert your audio files.\nAmongst many others,\nsupport MP3, M4A, WAV and WMA.</string>
@@ -43,5 +44,11 @@
     <string name="choose_file_screen_convert_button">Convert!</string>
     <string name="choose_file_screen_outline_text_field_label">FilePath</string>
     <string name="choose_file_screen_choose_file_button">Select File</string>
+    <string name="converter_screen_plz_choose_file">Please Choose a File!</string>
+    <string name="anon_files_url">https://api.anonfiles.com/upload</string>
+    <string name="cloud_convert_create_jobs_url">https://api.cloudconvert.com/v2/jobs</string>
     <string name="api_key">eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiY2ZlNWRiODk5NzFjMjNmYzc3ZjE0Y2I0MWIyYzU4YWYxMzJhOGVlZDE3ZmZmNGZkNDJmMDMyMDIxNTMyZDU3ODc5YjRlNGRjMDdiZGMxNTYiLCJpYXQiOjE2NTA4OTEyMzYuODgwNDMsIm5iZiI6MTY1MDg5MTIzNi44ODA0MzIsImV4cCI6NDgwNjU2NDgzNi44NzY5MjEsInN1YiI6IjU1NTc1MTg3Iiwic2NvcGVzIjpbInVzZXIucmVhZCIsInVzZXIud3JpdGUiLCJ0YXNrLnJlYWQiLCJ0YXNrLndyaXRlIiwid2ViaG9vay5yZWFkIiwid2ViaG9vay53cml0ZSIsInByZXNldC5yZWFkIiwicHJlc2V0LndyaXRlIl19.MppWAzx-th_k-ABxoCKzY8uXD0vT1xDYq_49XHCbadEaQNZzSfD3wtHG5duCPqx-Se7kdtbuw5ePhYsbpEikt5_4p-cFbgk7Q-Bm03k4uL45Hw_oMEQwePkYpnsRuYsX6CuEhUzr436uG0stiS1s1C07PySj4Ffej4ZGK8fBrTcuOEjL6rGepmcyvfRqkumh0dkO4ZQRsaQHr7hkqGdvCMonSa1dtZOF7huU0T4hX53uxVBrfdpDBzHkWYhgtusQ2a08KtXVqWm8ZXOQ5J4a_eTDd_pVvmQpfFHEWDRSds0-h-Bjrt7Zg2T8kNLZwLGvQ8Spt2Amuh3SmvbRpg27DM0h2hHwWoDZZmZUTO1dBHIsrO5IbbZol2B2FGh9ZCvLLgy08ioUblmgwuqqR8_umHjRhhDzMnzfRMRqXsYAK09VC_6CiYxwHKT_FcY6H5TH1WKsdzcCXFUPp56RDjGR49dPaTtY3bYOriPGSiQkTfYqEfmusF965Kxp7mp1JzSddQqV-yhVkm46qeUQkR-NOAS82EN6_siCM0UrZB0ftHFvctUkeVLpNzk9vaIom09uOE-kjpqHfBARXPRu_KEhlwjgKD57qeX3T-f5Cv1wdyUonzLZoePzQEupP3TcChZVSVAZXygWlQ_6fj83plX9OgReAsgj8cJbltnwk0ujvao</string>
+    <string name="drawer_screen_project_github_site">https://github.com/muxinyu1/JustAConverter</string>
+    <string name="drawer_screen_cloud_convert_site">https://cloudconvert.com/</string>
+    <string name="drawer_screen_anon_files_site">https://anonfiles.com/</string>
 </resources>

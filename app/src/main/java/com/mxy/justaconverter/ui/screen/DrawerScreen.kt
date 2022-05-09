@@ -53,6 +53,11 @@ fun DrawerScreen(onDrawerCardClick: (String) -> Unit) {
             isLinkOut = true,
             onCardClick = onDrawerCardClick
         )
+        DrawerCard(
+            cardName = stringResource(R.string.drawer_screen_card_anon_files),
+            isLinkOut = true,
+            onCardClick = onDrawerCardClick
+        )
     }
 }
 

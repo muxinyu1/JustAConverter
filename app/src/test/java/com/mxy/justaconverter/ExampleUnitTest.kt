@@ -1,5 +1,6 @@
 package com.mxy.justaconverter
 
+import android.net.Uri
 import com.cloudconvert.client.CloudConvertClient
 import com.cloudconvert.client.setttings.StringSettingsProvider
 import com.cloudconvert.dto.request.UploadImportRequest
@@ -12,6 +13,7 @@ import com.mxy.justaconverter.util.Utility.Companion.getSourceFileUrl
 import okhttp3.*
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.apache.http.client.config.RequestConfig
 import org.apache.http.client.methods.HttpPost
@@ -22,9 +24,14 @@ import org.json.JSONException
 import org.json.JSONObject
 import org.junit.Assert.*
 import org.junit.Test
+import org.junit.runner.manipulation.Ordering
 import java.io.File
 import java.io.FileInputStream
+import java.io.IOException
 import java.nio.file.Paths
+import java.util.concurrent.TimeUnit
+import kotlin.concurrent.thread
+import kotlin.jvm.Throws
 
 
 /**
@@ -40,7 +47,13 @@ class ExampleUnitTest {
 
     @Test
     fun cloudConvertTest() {
-        val streamAndUrl = Utility.getDownloadUrlFromFile(null, "F:\\video.mp4", "mp4", "flv", "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiY2ZlNWRiODk5NzFjMjNmYzc3ZjE0Y2I0MWIyYzU4YWYxMzJhOGVlZDE3ZmZmNGZkNDJmMDMyMDIxNTMyZDU3ODc5YjRlNGRjMDdiZGMxNTYiLCJpYXQiOjE2NTA4OTEyMzYuODgwNDMsIm5iZiI6MTY1MDg5MTIzNi44ODA0MzIsImV4cCI6NDgwNjU2NDgzNi44NzY5MjEsInN1YiI6IjU1NTc1MTg3Iiwic2NvcGVzIjpbInVzZXIucmVhZCIsInVzZXIud3JpdGUiLCJ0YXNrLnJlYWQiLCJ0YXNrLndyaXRlIiwid2ViaG9vay5yZWFkIiwid2ViaG9vay53cml0ZSIsInByZXNldC5yZWFkIiwicHJlc2V0LndyaXRlIl19.MppWAzx-th_k-ABxoCKzY8uXD0vT1xDYq_49XHCbadEaQNZzSfD3wtHG5duCPqx-Se7kdtbuw5ePhYsbpEikt5_4p-cFbgk7Q-Bm03k4uL45Hw_oMEQwePkYpnsRuYsX6CuEhUzr436uG0stiS1s1C07PySj4Ffej4ZGK8fBrTcuOEjL6rGepmcyvfRqkumh0dkO4ZQRsaQHr7hkqGdvCMonSa1dtZOF7huU0T4hX53uxVBrfdpDBzHkWYhgtusQ2a08KtXVqWm8ZXOQ5J4a_eTDd_pVvmQpfFHEWDRSds0-h-Bjrt7Zg2T8kNLZwLGvQ8Spt2Amuh3SmvbRpg27DM0h2hHwWoDZZmZUTO1dBHIsrO5IbbZol2B2FGh9ZCvLLgy08ioUblmgwuqqR8_umHjRhhDzMnzfRMRqXsYAK09VC_6CiYxwHKT_FcY6H5TH1WKsdzcCXFUPp56RDjGR49dPaTtY3bYOriPGSiQkTfYqEfmusF965Kxp7mp1JzSddQqV-yhVkm46qeUQkR-NOAS82EN6_siCM0UrZB0ftHFvctUkeVLpNzk9vaIom09uOE-kjpqHfBARXPRu_KEhlwjgKD57qeX3T-f5Cv1wdyUonzLZoePzQEupP3TcChZVSVAZXygWlQ_6fj83plX9OgReAsgj8cJbltnwk0ujvao")
+        val streamAndUrl = Utility.getDownloadUrlFromFile(
+            null,
+            Uri.parse(""),
+            "mp4",
+            "flv",
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiY2ZlNWRiODk5NzFjMjNmYzc3ZjE0Y2I0MWIyYzU4YWYxMzJhOGVlZDE3ZmZmNGZkNDJmMDMyMDIxNTMyZDU3ODc5YjRlNGRjMDdiZGMxNTYiLCJpYXQiOjE2NTA4OTEyMzYuODgwNDMsIm5iZiI6MTY1MDg5MTIzNi44ODA0MzIsImV4cCI6NDgwNjU2NDgzNi44NzY5MjEsInN1YiI6IjU1NTc1MTg3Iiwic2NvcGVzIjpbInVzZXIucmVhZCIsInVzZXIud3JpdGUiLCJ0YXNrLnJlYWQiLCJ0YXNrLndyaXRlIiwid2ViaG9vay5yZWFkIiwid2ViaG9vay53cml0ZSIsInByZXNldC5yZWFkIiwicHJlc2V0LndyaXRlIl19.MppWAzx-th_k-ABxoCKzY8uXD0vT1xDYq_49XHCbadEaQNZzSfD3wtHG5duCPqx-Se7kdtbuw5ePhYsbpEikt5_4p-cFbgk7Q-Bm03k4uL45Hw_oMEQwePkYpnsRuYsX6CuEhUzr436uG0stiS1s1C07PySj4Ffej4ZGK8fBrTcuOEjL6rGepmcyvfRqkumh0dkO4ZQRsaQHr7hkqGdvCMonSa1dtZOF7huU0T4hX53uxVBrfdpDBzHkWYhgtusQ2a08KtXVqWm8ZXOQ5J4a_eTDd_pVvmQpfFHEWDRSds0-h-Bjrt7Zg2T8kNLZwLGvQ8Spt2Amuh3SmvbRpg27DM0h2hHwWoDZZmZUTO1dBHIsrO5IbbZol2B2FGh9ZCvLLgy08ioUblmgwuqqR8_umHjRhhDzMnzfRMRqXsYAK09VC_6CiYxwHKT_FcY6H5TH1WKsdzcCXFUPp56RDjGR49dPaTtY3bYOriPGSiQkTfYqEfmusF965Kxp7mp1JzSddQqV-yhVkm46qeUQkR-NOAS82EN6_siCM0UrZB0ftHFvctUkeVLpNzk9vaIom09uOE-kjpqHfBARXPRu_KEhlwjgKD57qeX3T-f5Cv1wdyUonzLZoePzQEupP3TcChZVSVAZXygWlQ_6fj83plX9OgReAsgj8cJbltnwk0ujvao"
+        )
         println("转换后文件下载链接：$streamAndUrl")
         //FileUtils.copyInputStreamToFile(streamAndUrl.second, File("F:\\res.png"))
     }
@@ -140,5 +153,69 @@ class ExampleUnitTest {
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    @Test
+    @Throws(IOException::class)
+    fun okHttpTest() {
+        ///println("okHttpTest()")
+        val filePath = "F:\\video.mp4"
+        val file = File(filePath)
+        if (!file.exists()) {
+            println("草泥马，文件不存在")
+        } else {
+            val url = "https://api.anonfiles.com/upload"
+            val client = OkHttpClient.Builder().connectTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS).build()
+            val requestBody = MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart(
+                    "file",
+                    file.name,
+                    file.asRequestBody("multipart/form-data".toMediaTypeOrNull())
+                )
+                .build()
+            val request = Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .build()
+            val response = client.newCall(request).execute()
+            if (response.isSuccessful) {
+                println(response.body?.string())
+            }
+        }
+    }
+
+    @Test
+    fun okHttpTestThread() {
+        thread {
+            try {
+                okHttpTest()
+            } catch (e: Exception) {
+                println(e)
+            }
+        }
+    }
+
+    @Test
+    fun jsonFormatTest() {
+        val json = "{" +
+                "\"tasks\":{" +
+                "\"import-my-file\":{" +
+                "\"operation\":\"import/url\"," +
+                "\"url\":\"fjdk\"" +
+                "}," +
+                "\"convert-my-file\":{" +
+                "\"operation\":\"convert\"," +
+                "\"input\":\"import-my-file\"," +
+                "\"input_format\":\"word\"," +
+                "\"output_format\":\"pdf\"" +
+                "}," +
+                "\"export-my-file\":{" +
+                "\"operation\":\"export/url\"," +
+                "\"input\":\"convert-my-file\"" +
+                "}}}"
+        println(json)
     }
 }

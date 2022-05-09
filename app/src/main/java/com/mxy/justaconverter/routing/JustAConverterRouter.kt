@@ -13,6 +13,7 @@ sealed class Screen {
     object SettingsScreen: Screen()
     object TrashScreen: Screen()
     object TypeCardsScreen: Screen()
+    object JumpToWebsite: Screen()
 }
 
 object JustAConverterRouter {

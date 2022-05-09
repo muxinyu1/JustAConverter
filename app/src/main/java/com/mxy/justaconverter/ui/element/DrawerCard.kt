@@ -29,7 +29,12 @@ fun DrawerCardPreview() {
 }
 
 @Composable
-fun DrawerCard(cardName: String, isLinkOut: Boolean, onCardClick: (String) -> Unit, modifier: Modifier = Modifier) {
+fun DrawerCard(
+    cardName: String,
+    isLinkOut: Boolean,
+    onCardClick: (String) -> Unit,
+    modifier: Modifier = Modifier
+) {
     val cardShape = RoundedCornerShape(4.dp)
     val painter = when (cardName) {
         stringResource(id = R.string.drawer_screen_card_trash) -> painterResource(id = R.drawable.ic_drawer_screen_trash)
@@ -39,6 +44,7 @@ fun DrawerCard(cardName: String, isLinkOut: Boolean, onCardClick: (String) -> Un
             id = R.drawable.ic_drawer_screen_cloudconvert
         )
         stringResource(id = R.string.drawer_screen_card_link_out) -> painterResource(id = R.drawable.ic_drawer_screen_linkout)
+        stringResource(id = R.string.drawer_screen_card_anon_files) -> painterResource(id = R.drawable.ic_drawer_screen_anon_files)
         else -> painterResource(id = R.drawable.ic_drawer_screen_title)
     }
     Surface(
@@ -64,9 +70,11 @@ fun DrawerCard(cardName: String, isLinkOut: Boolean, onCardClick: (String) -> Un
                     .align(alignment = Alignment.CenterVertically)
             )
             if (isLinkOut) {
-                Row(modifier = Modifier
-                    .fillMaxWidth()
-                    .align(alignment = Alignment.CenterVertically)) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .align(alignment = Alignment.CenterVertically)
+                ) {
                     Spacer(modifier = Modifier.weight(0.8f))
                     Icon(
                         painter = painterResource(id = R.drawable.ic_drawer_screen_linkout),

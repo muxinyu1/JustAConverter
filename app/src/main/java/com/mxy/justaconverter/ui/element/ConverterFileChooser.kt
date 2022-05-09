@@ -27,18 +27,17 @@ fun ConverterFileChooser(modifier: Modifier, filePath: Uri?, onFilePathChanged: 
     var text by remember {
         mutableStateOf("")
     }
-    val launcher = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-        onFilePathChanged(uri)
-        Log.d("mxy!!!", "filePath = ${filePath?.path}")
+    val launcher = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) {
+        onFilePathChanged(it)
         when {
-            uri == null -> {
+            it == null -> {
                 text = ""
             }
-            uri.path == null -> {
+            it.path == null -> {
                 text = ""
             }
-            uri.path != null -> {
-                text = uri.path.toString()
+            it.path != null -> {
+                text = it.toString()
             }
         }
     }

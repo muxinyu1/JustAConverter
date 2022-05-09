@@ -21,8 +21,11 @@ import com.mxy.justaconverter.ui.screen.TypeCardsScreen
 import com.mxy.justaconverter.ui.theme.JustAConverterTheme
 import com.mxy.justaconverter.viewmodel.ConvertScreenViewModel
 import com.mxy.justaconverter.viewmodel.ScaffoldContentViewModel
+import java.util.concurrent.Executors
 
 class MainActivity : ComponentActivity() {
+
+    //val executorService = Executors.newFixedThreadPool(4)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +42,7 @@ class MainActivity : ComponentActivity() {
                         "...",
                         "...",
                         Uri.parse(""),
-                        context = this
+                        context = this,
                     )
                     val convertScreenViewModelState = remember {
                         mutableStateOf(convertScreenViewModel)
@@ -47,11 +50,13 @@ class MainActivity : ComponentActivity() {
                     when (JustAConverterRouter.currentScreen) {
                         is Screen.TypeCardsScreen -> TypeCardsScreen(
                             convertScreenViewModel = convertScreenViewModelState.value,
-                            coroutineScope = coroutineScope
+                            coroutineScope = coroutineScope,
+                            context = this
                         )
                         is Screen.ConverterScreen -> ConverterScreen(
                             convertScreenViewModelState.value,
-                            coroutineScope = coroutineScope
+                            coroutineScope = coroutineScope,
+                            context = this
                         )
                         else -> Text(text = "Else")
                     }

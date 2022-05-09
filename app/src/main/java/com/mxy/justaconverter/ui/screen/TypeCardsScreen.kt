@@ -41,11 +41,11 @@ fun TypeCardsScreen(
                     context.getString(R.string.drawer_screen_card_about) -> Screen.AboutScreen
                     else -> Screen.JumpToWebsite
                 }
-                coroutineScope.launch {
-                    scaffoldState.drawerState.close()
-                }
                 if (target != Screen.JumpToWebsite) {
                     JustAConverterRouter.navigateTo(target)
+                    coroutineScope.launch {
+                        scaffoldState.drawerState.close()
+                    }
                 } else {
                     val website = when (it) {
                         context.getString(R.string.drawer_screen_card_github) -> context.getString(R.string.drawer_screen_project_github_site)

@@ -11,6 +11,7 @@ import com.mxy.justaconverter.ui.element.ConverterScreenScaffoldContent
 import com.mxy.justaconverter.ui.element.TopAppBar
 import com.mxy.justaconverter.viewmodel.BottomBarViewModel
 import com.mxy.justaconverter.viewmodel.ConvertScreenViewModel
+import com.mxy.justaconverter.viewmodel.ScaffoldContentViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -18,7 +19,7 @@ import kotlinx.coroutines.launch
 fun ConverterScreen(
     convertScreenViewModel: ConvertScreenViewModel,
     coroutineScope: CoroutineScope,
-    context: Context
+    context: Context,
 ) {
     val scaffoldState = rememberScaffoldState()
     Scaffold(topBar = {
@@ -39,6 +40,8 @@ fun ConverterScreen(
             onFilePathChanged = convertScreenViewModel.onFilePathChanged,
             onFromFormatChanged = convertScreenViewModel.onFromFormatChanged,
             onToFormatChanged = convertScreenViewModel.onToFormatChanged,
+            buttonText = convertScreenViewModel.buttonText,
+            isCustomized = convertScreenViewModel.chooseFileType == ScaffoldContentViewModel.ChooseFileType.Customize
         )
     },
         scaffoldState = scaffoldState,

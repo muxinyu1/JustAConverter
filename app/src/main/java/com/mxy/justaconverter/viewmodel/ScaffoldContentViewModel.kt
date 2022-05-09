@@ -25,7 +25,8 @@ class ScaffoldContentViewModel(
         Presentation,
         Sheet,
         Vector,
-        Video
+        Video,
+        Customize
     }
 
     val onTypeCardClick: (String) -> Unit = {

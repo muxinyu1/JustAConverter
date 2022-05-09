@@ -10,6 +10,8 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mxy.justaconverter.R
+import com.mxy.justaconverter.routing.JustAConverterRouter
+import com.mxy.justaconverter.routing.Screen
 import com.mxy.justaconverter.util.Utility
 import kotlinx.coroutines.*
 
@@ -19,38 +21,46 @@ class ConvertScreenViewModel(
     var to: String,
     var filePath: Uri?,
     var convertButtonState: Boolean = true,
+    var buttonText: String,
     context: Context
 ) : ViewModel() {
 
     @RequiresApi(Build.VERSION_CODES.Q)
     val convert: () -> Unit = {
-        //仅用于测试：
-        Log.d("mxy!!!", "开始转换！\n文件名：${filePath?.path}\n从${from}到${to}")
-        Log.d("mxy!!!", "选择的文件转换类型：${chooseFileType.name}")
-        if (filePath == null) {
+        if (filePath == null || filePath?.equals(Uri.parse("")) == true) {
             Toast.makeText(
                 context,
                 context.getString(R.string.converter_screen_plz_choose_file),
                 Toast.LENGTH_SHORT
-            )
+            ).show()
+            buttonText = context.getString(R.string.choose_file_screen_convert_button)
+            convertButtonState = true
+            JustAConverterRouter.navigateTo(Screen.TypeCardsScreen)
         } else {
+            buttonText = context.getString(R.string.choose_file_screen_convert_button_converting)
+            convertButtonState = false
+            Log.d("mxy!!!", this.toString())
             viewModelScope.launch(Dispatchers.IO) {
-                if (filePath == null) {
-                    Log.d("mxy!!!", "filepath空!")
-                }
-                else {
-                    val downloadUrl = Utility.getDownloadUrlFromFileOkHttp(context, filePath!!, from, to)
-                    if (downloadUrl == null) {
-                        Log.d("mxy!!!", "downloadUrl 是空的！")
-                    }
-                    else {
-                        Log.d("mxy!!!", downloadUrl)
-                        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(downloadUrl)))
-                    }
+                val downloadUrl =
+                    Utility.getDownloadUrlFromFileOkHttp(context, filePath!!, from, to)
+                if (downloadUrl == null) {
+                    Log.d("mxy!!!", "downloadUrl 是空的！")
+                    Toast.makeText(
+                        context,
+                        context.getString(R.string.converter_screen_convert_error),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    buttonText = context.getString(R.string.choose_file_screen_convert_button)
+                    convertButtonState = true
+                } else {
+                    Log.d("mxy!!!", downloadUrl)
+                    buttonText = context.getString(R.string.choose_file_screen_convert_button)
+                    convertButtonState = true
+                    JustAConverterRouter.navigateTo(Screen.TypeCardsScreen)
+                    context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(downloadUrl)))
                 }
             }
         }
-        //Log.d("mxy!!!", "转换结果的Url：${streamAndUrl.second}")
     }
     val onFilePathChanged: (Uri?) -> Unit = {
         filePath = it
@@ -61,4 +71,9 @@ class ConvertScreenViewModel(
     val onToFormatChanged: (String) -> Unit = {
         to = it
     }
+
+    override fun toString(): String {
+        return "ConvertScreenViewModel(from='$from', to='$to', filePath=$filePath, convertButtonState=$convertButtonState, buttonText='$buttonText')"
+    }
+
 }

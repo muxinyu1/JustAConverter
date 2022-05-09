@@ -25,7 +25,9 @@ fun ConverterScreenScaffoldContent(
     enable: Boolean,
     onFilePathChanged: (Uri?) -> Unit,
     onFromFormatChanged: (String) -> Unit,
-    onToFormatChanged: (String) -> Unit
+    onToFormatChanged: (String) -> Unit,
+    buttonText: String,
+    isCustomized: Boolean
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
         ConverterTitle(
@@ -34,16 +36,28 @@ fun ConverterScreenScaffoldContent(
                 .fillMaxWidth()
                 .align(alignment = Alignment.CenterHorizontally)
         )
-        ConverterFromToCard(
-            modifier = Modifier
-                .fillMaxWidth()
-                .align(alignment = Alignment.CenterHorizontally),
-            chooseFileType = chooseFileType,
-            from = from,
-            to = to,
-            onToFormatChanged = onToFormatChanged,
-            onFromFormatChanged = onFromFormatChanged
-        )
+        if (!isCustomized) {
+            ConverterFromToCard(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .align(alignment = Alignment.CenterHorizontally),
+                chooseFileType = chooseFileType,
+                from = from,
+                to = to,
+                onToFormatChanged = onToFormatChanged,
+                onFromFormatChanged = onFromFormatChanged
+            )
+        } else {
+            ConverterFromToCustomizeCard(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .align(alignment = Alignment.CenterHorizontally),
+                from = from,
+                to = to,
+                onFromFormatChanged = onFromFormatChanged,
+                onToFormatChanged = onToFormatChanged
+            )
+        }
         ConverterFileChooser(
             modifier = Modifier
                 .fillMaxWidth()
@@ -57,7 +71,8 @@ fun ConverterScreenScaffoldContent(
                 .fillMaxWidth()
                 .align(alignment = Alignment.CenterHorizontally),
             onConvertButtonClick = onConvertButtonClick,
-            enable = enable
+            enable = enable,
+            text = buttonText
         )
     }
 }
@@ -67,10 +82,10 @@ fun ConverterScreenScaffoldContent(
 fun ConverterScreenScaffoldContentPreview() {
     val uri = Uri.parse("")
     val fromStateFrom = remember {
-        mutableStateOf("...")
+        mutableStateOf("")
     }
     val fromStateTo = remember {
-        mutableStateOf("...")
+        mutableStateOf("")
     }
     val filePathState = remember {
         mutableStateOf(uri)
@@ -88,6 +103,8 @@ fun ConverterScreenScaffoldContentPreview() {
         enable = enableState.value,
         onFilePathChanged = {},
         onFromFormatChanged = {},
-        onToFormatChanged = {}
+        onToFormatChanged = {},
+        buttonText = "Convert!",
+        isCustomized = true
     )
 }

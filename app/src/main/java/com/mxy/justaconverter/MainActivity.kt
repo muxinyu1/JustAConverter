@@ -41,8 +41,9 @@ class MainActivity : ComponentActivity() {
                         ScaffoldContentViewModel.ChooseFileType.Archive,
                         "...",
                         "...",
-                        Uri.parse(""),
+                        null,
                         context = this,
+                        buttonText = this.getString(R.string.choose_file_screen_convert_button)
                     )
                     val convertScreenViewModelState = remember {
                         mutableStateOf(convertScreenViewModel)

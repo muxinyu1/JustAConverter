@@ -16,7 +16,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -27,8 +26,15 @@ import com.mxy.justaconverter.ui.theme.ConverterConvertButtonColor
 fun ConverterConvertButton(
     modifier: Modifier,
     onConvertButtonClick: () -> Unit,
-    enable: Boolean
+    enable: Boolean,
+    text: String
 ) {
+    val enableState = remember {
+        mutableStateOf(enable)
+    }
+    val textState = remember {
+        mutableStateOf(text)
+    }
     Button(
         shape = CircleShape,
         modifier = modifier
@@ -40,24 +46,38 @@ fun ConverterConvertButton(
         colors = ButtonDefaults.buttonColors(
             backgroundColor = ConverterConvertButtonColor,
         ),
-        onClick = onConvertButtonClick,
-        enabled = enable,
+        onClick = {
+            enableState.value = false
+            textState.value = "Converting!"
+            onConvertButtonClick()
+        },
+        enabled = enableState.value,
         border = BorderStroke(1.dp, Color.Black.copy(alpha = 0.3f))
     ) {
         Row(modifier = Modifier.padding(5.dp)) {
             Text(
                 modifier = Modifier.align(alignment = Alignment.CenterVertically),
-                text = stringResource(id = R.string.choose_file_screen_convert_button),
+                text = textState.value,
                 fontWeight = FontWeight.Bold,
                 color = Color.White
             )
             Spacer(modifier = Modifier.width(5.dp))
-            Icon(
-                modifier = Modifier.align(alignment = Alignment.CenterVertically),
-                painter = painterResource(id = R.drawable.ic_choose_file_screen_right_arrow),
-                contentDescription = "Convert Arrow",
-                tint = Color.White
-            )
+            if (enableState.value) {
+                Icon(
+                    modifier = Modifier.align(alignment = Alignment.CenterVertically),
+                    painter = painterResource(id = R.drawable.ic_choose_file_screen_right_arrow),
+                    contentDescription = "Convert Arrow",
+                    tint = Color.White
+                )
+            } else {
+                LoadingAnimation(
+                    modifier = Modifier.align(alignment = Alignment.CenterVertically),
+                    circleSize = 5.dp,
+                    spaceBetween = 2.dp,
+                    circleColor = Color.White,
+                    travelDistance = 4.dp
+                )
+            }
         }
     }
 }
@@ -73,6 +93,7 @@ fun ConverterConvertButtonPreview() {
             .padding(5.dp)
             .fillMaxWidth(),
         onConvertButtonClick = { enableState.value = !enableState.value },
-        enable = true
+        enable = true,
+        text = "Convert!"
     )
 }

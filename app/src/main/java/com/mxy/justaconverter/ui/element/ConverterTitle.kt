@@ -37,7 +37,9 @@ fun ConverterTitle(
             text = getChooseFileTypeName(chooseFileType = chooseFileType),
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.align(alignment = CenterHorizontally).padding(10.dp)
+            modifier = Modifier
+                .align(alignment = CenterHorizontally)
+                .padding(10.dp)
         )
         Icon(
             painter = painter,
@@ -93,6 +95,8 @@ fun getPainterFromChooseFileType(chooseFileType: ScaffoldContentViewModel.Choose
             painterResource(id = R.drawable.ic_type_vector)
         ScaffoldContentViewModel.ChooseFileType.Video ->
             painterResource(id = R.drawable.ic_type_video)
+        ScaffoldContentViewModel.ChooseFileType.Customize ->
+            painterResource(id = R.drawable.ic_type_video)
     }
 }
 
@@ -119,6 +123,8 @@ fun getChooseFileDescription(chooseFileType: ScaffoldContentViewModel.ChooseFile
             stringResource(id = R.string.choose_file_screen_vector_description)
         ScaffoldContentViewModel.ChooseFileType.Video ->
             stringResource(id = R.string.choose_file_screen_video_description)
+        ScaffoldContentViewModel.ChooseFileType.Customize ->
+            ""
     }
 }
 
@@ -145,5 +151,7 @@ fun getChooseFileTypeName(chooseFileType: ScaffoldContentViewModel.ChooseFileTyp
             stringResource(id = R.string.type_view_model_vector)
         ScaffoldContentViewModel.ChooseFileType.Video ->
             stringResource(id = R.string.type_view_model_video)
+        ScaffoldContentViewModel.ChooseFileType.Customize ->
+            stringResource(id = R.string.type_view_model_customize)
     }
 }

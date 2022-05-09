@@ -213,6 +213,8 @@ fun getFormatList(chooseFileType: ScaffoldContentViewModel.ChooseFileType): List
                 "SWF",
                 "WMV"
             )
+        ScaffoldContentViewModel.ChooseFileType.Customize ->
+            listOf()
     }
 }
 

@@ -45,13 +45,16 @@ class ConvertScreenViewModel(
                     Utility.getDownloadUrlFromFileOkHttp(context, filePath!!, from, to)
                 if (downloadUrl == null) {
                     Log.d("mxy!!!", "downloadUrl 是空的！")
-                    Toast.makeText(
-                        context,
-                        context.getString(R.string.converter_screen_convert_error),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(
+                            context,
+                            context.getString(R.string.converter_screen_convert_error),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                     buttonText = context.getString(R.string.choose_file_screen_convert_button)
                     convertButtonState = true
+                    JustAConverterRouter.navigateTo(Screen.TypeCardsScreen)
                 } else {
                     Log.d("mxy!!!", downloadUrl)
                     buttonText = context.getString(R.string.choose_file_screen_convert_button)

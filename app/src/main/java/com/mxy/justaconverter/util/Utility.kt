@@ -15,6 +15,7 @@ import com.cloudconvert.dto.request.UrlImportRequest
 import com.google.common.collect.ImmutableMap
 import com.google.gson.Gson
 import com.mxy.justaconverter.R
+import com.mxy.justaconverter.jsons.anonfiles.AnonFilesDownloadResponse
 import com.mxy.justaconverter.jsons.cloudconvert.download.CloudConvertDownloadResponse
 import com.mxy.justaconverter.jsons.cloudconvert.id.CloudConvertIdResponse
 import okhttp3.MediaType.Companion.toMediaType
@@ -91,10 +92,8 @@ class Utility {
         }
 
         fun getResponseUrl(json: String): String {
-            return (((((gson.fromJson(
-                json,
-                Map::class.java
-            )["data"] as Map<*, *>)["file"]) as Map<*, *>)["url"]) as Map<*, *>)["full"] as String
+            val anonFilesDownloadResponse = gson.fromJson(json, AnonFilesDownloadResponse::class.java)
+            return anonFilesDownloadResponse.data.file.url.full
         }
 
         fun getSourceFileUrl(url: String?): String? {

@@ -96,7 +96,7 @@ fun getPainterFromChooseFileType(chooseFileType: ScaffoldContentViewModel.Choose
         ScaffoldContentViewModel.ChooseFileType.Video ->
             painterResource(id = R.drawable.ic_type_video)
         ScaffoldContentViewModel.ChooseFileType.Customize ->
-            painterResource(id = R.drawable.ic_type_video)
+            painterResource(id = R.drawable.ic_type_customized)
     }
 }
 
@@ -124,7 +124,7 @@ fun getChooseFileDescription(chooseFileType: ScaffoldContentViewModel.ChooseFile
         ScaffoldContentViewModel.ChooseFileType.Video ->
             stringResource(id = R.string.choose_file_screen_video_description)
         ScaffoldContentViewModel.ChooseFileType.Customize ->
-            ""
+            stringResource(id = R.string.choose_file_screen_customized_description)
     }
 }
 

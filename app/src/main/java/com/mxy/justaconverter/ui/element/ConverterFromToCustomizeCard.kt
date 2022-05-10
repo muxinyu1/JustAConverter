@@ -1,9 +1,6 @@
 package com.mxy.justaconverter.ui.element
 
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -33,7 +30,7 @@ fun ConverterFromToCustomizeCard(
         CustomizeFormatBox(
             label = "from",
             format = from,
-            modifier = Modifier.widthIn(max = 100.dp),
+            modifier = Modifier.widthIn(max = 100.dp).wrapContentHeight(),
             onFormatChange = onFromFormatChanged
         )
         Text(
@@ -44,7 +41,7 @@ fun ConverterFromToCustomizeCard(
         CustomizeFormatBox(
             label = "to",
             format = to,
-            modifier = Modifier.widthIn(max = 100.dp),
+            modifier = Modifier.widthIn(max = 100.dp).wrapContentHeight(),
             onFormatChange = onToFormatChanged
         )
     }

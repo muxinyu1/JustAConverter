@@ -13,6 +13,7 @@ import com.mxy.justaconverter.routing.JustAConverterRouter
 import com.mxy.justaconverter.routing.Screen
 import com.mxy.justaconverter.ui.element.BottomAppBar
 import com.mxy.justaconverter.ui.element.TopAppBar
+import com.mxy.justaconverter.ui.element.TypeCardsScreenFloatingButton
 import com.mxy.justaconverter.ui.element.TypesCards
 import com.mxy.justaconverter.viewmodel.BottomBarViewModel
 import com.mxy.justaconverter.viewmodel.ConvertScreenViewModel
@@ -62,7 +63,10 @@ fun TypeCardsScreen(
                     }
                 }
             })
-        }, content = {
+        }, floatingActionButton = { TypeCardsScreenFloatingButton {
+            convertScreenViewModel.chooseFileType = ScaffoldContentViewModel.ChooseFileType.Customize
+            JustAConverterRouter.navigateTo(Screen.ConverterScreen)
+        }}, content = {
             TypesCards(onTypeCardClick = {
                 val type = when (it) {
                     "Archive" -> ScaffoldContentViewModel.ChooseFileType.Archive

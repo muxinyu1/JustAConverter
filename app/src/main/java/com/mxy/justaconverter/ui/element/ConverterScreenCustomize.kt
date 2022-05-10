@@ -1,5 +1,7 @@
 package com.mxy.justaconverter.ui.element
 
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
@@ -23,11 +25,10 @@ fun CustomizeFormatBox(
         mutableStateOf(format)
     }
     OutlinedTextField(
-        modifier = modifier,
+        modifier = modifier.wrapContentHeight().wrapContentWidth(),
         value = formatState.value,
         onValueChange = { formatState.value = it; onFormatChange(it) },
         label = { Text(text = label) },
-        placeholder = { Text(text = "Input $label Format") },
         keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Ascii),
         maxLines = 1,
         colors = TextFieldDefaults.outlinedTextFieldColors(

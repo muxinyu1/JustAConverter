@@ -17,6 +17,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.mxy.justaconverter.routing.JustAConverterRouter
 import com.mxy.justaconverter.routing.Screen
 import com.mxy.justaconverter.ui.screen.ConverterScreen
+import com.mxy.justaconverter.ui.screen.HistoryScreen
+import com.mxy.justaconverter.ui.screen.SettingsScreen
 import com.mxy.justaconverter.ui.screen.TypeCardsScreen
 import com.mxy.justaconverter.ui.theme.JustAConverterTheme
 import com.mxy.justaconverter.viewmodel.ConvertScreenViewModel
@@ -26,6 +28,16 @@ import java.util.concurrent.Executors
 class MainActivity : ComponentActivity() {
 
     //val executorService = Executors.newFixedThreadPool(4)
+    private val convertScreenViewModel by lazy {
+        ConvertScreenViewModel(
+            ScaffoldContentViewModel.ChooseFileType.Archive,
+            "...",
+            "...",
+            null,
+            context = this,
+            buttonText = this.getString(R.string.choose_file_screen_convert_button)
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,14 +49,6 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     val coroutineScope = rememberCoroutineScope()
-                    val convertScreenViewModel = ConvertScreenViewModel(
-                        ScaffoldContentViewModel.ChooseFileType.Archive,
-                        "...",
-                        "...",
-                        null,
-                        context = this,
-                        buttonText = this.getString(R.string.choose_file_screen_convert_button)
-                    )
                     val convertScreenViewModelState = remember {
                         mutableStateOf(convertScreenViewModel)
                     }
@@ -59,7 +63,15 @@ class MainActivity : ComponentActivity() {
                             coroutineScope = coroutineScope,
                             context = this
                         )
-                        else -> Text(text = "Else")
+                        is Screen.HistoryScreen -> HistoryScreen(
+                            coroutineScope = coroutineScope,
+                            context = this
+                        )
+                        is Screen.SettingsScreen -> SettingsScreen(
+                            coroutineScope = coroutineScope,
+                            context = this
+                        )
+                        else -> Text(text = "Now Constructing...")
                     }
                 }
             }

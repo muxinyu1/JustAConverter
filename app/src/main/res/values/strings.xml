@@ -54,4 +54,7 @@
     <string name="choose_file_screen_convert_button_converting">Converting!</string>
     <string name="converter_screen_convert_error">This Transformation is not Allowed</string>
     <string name="type_view_model_customize">Customize</string>
+    <string name="choose_file_screen_customized_description">Customize your own converting rules, such as "from docx to pdf".</string>
+    <string name="todo_hint_building">This Module is Still in Building...</string>
+    <string name="splash_screen_based_on">CloudConvert &amp; AnonFiles</string>
 </resources>
